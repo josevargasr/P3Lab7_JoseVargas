@@ -16,7 +16,13 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
+
+using std::cout;
+using std::endl;
+using std::cin;
 using std::string;
+using std::vector;
 
 class Persona {
 public:
@@ -26,8 +32,12 @@ public:
     string getNombre() const;
     string getPass() const;
     int getLlave() const;
+    vector<string> getMensajes() const;
+    void setMensajes(string);
+    void printMensajes();
     virtual ~Persona();
 private:
+    vector<string> mensajes;
     string nombre, apellido, pass;
     int llave;
 };

@@ -14,6 +14,13 @@
 #include "Persona.h"
 #include <iostream>
 #include <string>
+#include <vector>
+
+using std::cout;
+using std::endl;
+using std::cin;
+using std::string;
+using std::vector;
 
 Persona::Persona() {
 }
@@ -23,6 +30,7 @@ Persona::Persona(string nombre, string apellido, string pass, int llave) {
     this->apellido = apellido;
     this-> pass= pass;
     this->llave = llave;
+    
 }
 
 Persona::Persona(const Persona& orig) {
@@ -52,4 +60,19 @@ int Persona::getLlave() const
 	return llave;
 }
 
+vector<string> Persona::getMensajes() const
+{
+	return mensajes;
+}
 
+void Persona::setMensajes(string mensaje)
+{
+    mensajes.push_back(mensaje);
+    
+}
+
+void Persona::printMensajes(){
+    cout << "Bandeja: " << endl;
+    for(int i = 0; i < mensajes.size(); i++)
+        cout << "[" << i << "] " << mensajes[i] << endl;
+}

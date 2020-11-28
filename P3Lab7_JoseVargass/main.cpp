@@ -55,11 +55,12 @@ int main(int argc, char** argv) {
                         "Contraseña: " << persona.getPass() << endl;
                 usuarios.push_back(persona);
                 cout << endl;
-                
+
                 break;
             }
             case 2:
             {
+                int posicion;
                 bool logged = false;
                 Persona p_logged;
                 string log_nombre = "", log_pass = "";
@@ -70,16 +71,19 @@ int main(int argc, char** argv) {
                 for (int i = 0; i < usuarios.size(); i++) {
                     Persona temporal = usuarios[i];
                     if (log_nombre == temporal.getNombre() && temporal.getPass() == log_pass) {
+                        posicion = i;
                         p_logged = temporal;
                         logged = true;
                         break;
                     }
-                    
+
                 }
                 if (logged) {
+                    cout << endl;
                     bool loop2 = true;
                     while (loop2) {
                         int opcion2 = 0;
+
                         cout << "Bienvenid@ " << p_logged.getNombre() << endl
                                 << "1. Enviar mensaje" << endl
                                 << "2. Ver mensajes" << endl
@@ -92,21 +96,30 @@ int main(int argc, char** argv) {
                             {
                                 int pos_recibidor = 0;
                                 string mensaje = "";
-                                for(int i = 0; i < usuarios.size(); i++){
+                                for (int i = 0; i < usuarios.size(); i++) {
                                     Persona temporal = usuarios[i];
-                                    cout <<"["<< i << "] " << temporal.getNombre() << endl;
+                                    cout << "[" << i << "] " << temporal.getNombre() << endl;
                                 }
                                 cout << "Ingrese el numero del contacto a enviar: ";
                                 cin >> pos_recibidor;
                                 cout << "Ingrese su mensaje: ";
                                 cin >> mensaje;
+                                Persona temp2 = usuarios[pos_recibidor];
+                                temp2.setMensajes(mensaje);
+                                temp2.printMensajes();
+                                vector<string> vtemp = temp2.getMensajes();
+                                ((Persona)usuarios[pos_recibidor]).setMensajes(vtemp[0]);
                                 cout << "El mensaje fue enviado con éxito" << endl;
                                 cout << endl;
                                 break;
                             }
                             case 2:
                             {
-                                cout << "Ver Mensajes: " << endl;
+                                int pos_mensaje = 0;
+                                usuarios[posicion].printMensajes();
+                                cout << "Ingrese el mensaje que desea ver: ";
+                                cin >> pos_mensaje;
+
                                 cout << endl;
                                 break;
                             }
@@ -137,4 +150,6 @@ int main(int argc, char** argv) {
     }
     return 0;
 }
+
+
 
